@@ -7,12 +7,72 @@ import IconButton from '@material-ui/core/IconButton';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import MicIcon from '@material-ui/icons/Mic';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import ChatBubble from '../Components/ChatBubble';
 
+let CHATS = [
 
+    {
+        name: "Rakesh",
+        message: "Hi Ashsish",
+        time: new Date().toISOString(),
+        type: "sender"
+    },
+    {
+        name: "Rakesh",
+        message: "Had Dinner ?",
+        time: new Date().toISOString(),
+        type: "sender"
+    },
+    {
+        name: "Ashish",
+        message: "Yep a way back",
+        time: new Date().toISOString(),
+        type: "recevier"
+    },
+
+]
 
 const Chat = () => {
 
+  const getChats = (chats) => {
+        return chats.map((chatMessage, index) => {
+            return <ChatBubble
+            key={index}
+                name={chatMessage.name}
+                message={chatMessage.message}
+                time={chatMessage.time}
+                type={chatMessage.type}
+            />
+        })
+    }
+
+    const mic = (event) => {
+        event.preventDefault();
+        // alert(message);
+        const msg = {
+            name: "Ashish",
+            message,
+            time: new Date().toISOString(),
+            type: "receiver"
+        }
+        const data = [...chats, msg]
+        console.log('data', data)
+        setChats(data)
+        setMessage("")
+        // getChats();
+
+    }
+
+    // useEffect(() =>{
+    //     setChats(data)
+    // },[])
+
     const [seed, setSeed] = useState('');
+
+    const [message,setMessage] = useState('');
+    const [chats,setChats] = useState(CHATS);
+
+
 
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000));
@@ -35,36 +95,27 @@ const Chat = () => {
                     </IconButton>
                 </div>
             </div>
+            {/* bubble2 is sender and bubble is receiver */}
             <div className='chat_body'>
-                <div className='bubble'>
-                    <div className='text'>
-                        <p className='name'>Ashish Gpt</p>
-                        <p className='message_sender'>Keep it up bro... 👍</p>
-                        <span className='timestamp'>2:15 PM</span>
-                    </div>
-                    <span className='bubble-arrow'></span>
-                </div>
-                <div className='bubble2'>
-                    <div className='text2'>
-                        <p className='name2'>Vishal Gpt</p>
-                        <p className='message_sender2'>Thanks Brother 🥰</p>
-                        <span className='timestamp2'>7:45 AM</span>
-                    </div>
-                    <span className='bubble-arrow2'></span>
-                </div>
+                {getChats(chats)}
+
+
             </div>
             <div className='chat_footer'>
                 <IconButton>
                     <EmojiEmotionsOutlinedIcon />
                 </IconButton>
                 <IconButton>
-                    <AttachFileIcon/>
+                    <AttachFileIcon />
                 </IconButton>
                 <form>
-                    <input type='text' placeholder='Type a Message' />
+                    <input type='text'
+                     placeholder='Type a Message'
+                     value={message}
+                     onChange={(e)=>setMessage(e.target.value)}  />
                 </form>
                 <IconButton>
-                    <MicIcon />
+                    <MicIcon onClick={mic} />
                 </IconButton>
             </div>
         </div>
