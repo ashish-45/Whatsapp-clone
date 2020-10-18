@@ -7,8 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import MicIcon from '@material-ui/icons/Mic';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 
 

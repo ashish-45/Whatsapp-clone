@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../Components/SidebarChat.css';
 import Avatar from '@material-ui/core/Avatar';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const SidebarChat = ({ name, message,date }) => {
+const SidebarChat = ({ name, message, date }) => {
 
     const [seed, setSeed] = useState('');
 
